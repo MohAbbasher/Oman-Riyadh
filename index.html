@@ -121,12 +121,10 @@
         const sa_card = document.querySelector('#sa-card')
         const oman_card = document.querySelector('#oman-card')
         const oman_visa_card = document.querySelector('#oman-visa-card')
-        const dropdown_button = document.querySelector('#dropdown-button');
         let selected_visa_type = null
         let selected_job_visa_type = null
         const job_no_cert_items = document.querySelectorAll('.job-no-cert')
         const job_cert_items = document.querySelectorAll('.job-cert')
-        const dropdown_button2 = document.querySelector('#dropdown-button2');
 
         document.querySelector('#visa-select').value = 0
         document.querySelector('#job-visa-select').value = 0
@@ -169,12 +167,11 @@
                 resetView()
             }
         }
-        const resetView = () => {
-          
+        const resetView = () => {          
             sa_card.style.display = 'none'
             oman_card.style.display = 'none'
             oman_visa_card.style.display = 'none'
-
+            document.querySelector('#job-visa-select').value = 0
         }
     </script>
 </body>
