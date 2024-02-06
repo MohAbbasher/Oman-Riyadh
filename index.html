@@ -33,7 +33,7 @@
                     <select id="visa-select" class="form-select" onchange="set_visa_type()">
                         <option value="0">اختر نوع التأشيرة</option>
                         <option value="1">تأشيرة عمل</option>
-                        <option value="2" >تأشيرة زيارة</option>
+                        <option value="2" disabled>تأشيرة زيارة</option>
                         <option value="3" disabled>تأشيرة إستقدام</option>
                     </select>
                 </div>
@@ -130,15 +130,17 @@
 
         document.querySelector('#visa-select').value = 0
         document.querySelector('#job-visa-select').value = 0
-      
+
 
         const set_visa_type = () => {
             const select = document.querySelector('#visa-select');
             selected_visa_type = select.value
             if (selected_visa_type == 1)
                 div_job_visa_type.style.display = 'inline'
-            else
+            else {
                 div_job_visa_type.style.display = 'none'
+                resetView();
+            }
         }
 
         const set_job_visa_type = () => {
@@ -163,8 +165,17 @@
                     element.style.display = 'block'
                 })
             }
+            else {
+                resetView()
+            }
         }
+        const resetView = () => {
+          
+            sa_card.style.display = 'none'
+            oman_card.style.display = 'none'
+            oman_visa_card.style.display = 'none'
 
+        }
     </script>
 </body>
 
