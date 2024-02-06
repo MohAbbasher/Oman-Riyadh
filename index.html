@@ -27,32 +27,24 @@
             </div>
 
             <div class="card-body">
-                <div class="dropdown" style="display: inline;">
-                    <button id="dropdown-button" class="btn btn-primary dropdown-toggle" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        اختر نوع التأشيرة
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><button class="dropdown-item" type="button" onclick="set_visa_type(this,0)">تأشيرة
-                                عمل</button></li>
-                        <li><button class="dropdown-item disabled" type="button" onclick="set_visa_type(this,1)">تأشيرة
-                                زيارة</button></li>
-                        <li><button class="dropdown-item disabled" type="button" onclick="set_visa_type(this,2)">تأشيرة
-                                إستقدام</button></li>
-                    </ul>
+
+                <div>
+                    <span style="margin-bottom:5px ; display: block;"> نوع التأشيرة </span>
+                    <select id="visa-select" class="form-select" onchange="set_visa_type()">
+                        <option value="0">اختر نوع التأشيرة</option>
+                        <option value="1">تأشيرة عمل</option>
+                        <option value="2" >تأشيرة زيارة</option>
+                        <option value="3" disabled>تأشيرة إستقدام</option>
+                    </select>
                 </div>
 
-                <div id="dropdown-job-type" class="dropdown" style="display: none;">
-                    <button id="dropdown-button2" class="btn btn-primary dropdown-toggle" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        اختر نوع المهنة
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><button class="dropdown-item" type="button" onclick="set_job_visa_type(this,0)">تأشيرة
-                                عمل للمهن العليا - تحتاج لشهادة (طبيب - مهندس ...)</button></li>
-                        <li><button class="dropdown-item" type="button" onclick="set_job_visa_type(this,1)">تأشيرة
-                                عمل للمهن العمالية لا تحتاج لشهادة</button></li>
-                    </ul>
+                <div id="div-job-visa-type" style="display: none;">
+                    <span style="margin-bottom:5px ; display: block;"> نوع المهنة </span>
+                    <select id="job-visa-select" class="form-select" onchange="set_job_visa_type()">
+                        <option value=0>اختر نوع المهنة</option>
+                        <option value=1>تأشيرة عمل للمهن العليا - تحتاج لشهادة</option>
+                        <option value=2>تأشيرة عمل للمهن العمالية لا تحتاج لشهادة</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -120,11 +112,12 @@
 
         </div>
 
-        <span style="font-size: small;">for any suggesion contact me at: <a href="https://wa.me/249116557824">whatapp</a></span>
+        <span style="font-size: small; display: block;text-align: center;">for any suggesion contact me at: <a
+                href="https://wa.me/249116557824">whatapp</a></span>
     </div>
 
     <script>
-        const dropdown_job_type = document.querySelector('#dropdown-job-type')
+        const div_job_visa_type = document.querySelector('#div-job-visa-type')
         const sa_card = document.querySelector('#sa-card')
         const oman_card = document.querySelector('#oman-card')
         const oman_visa_card = document.querySelector('#oman-visa-card')
@@ -135,22 +128,26 @@
         const job_cert_items = document.querySelectorAll('.job-cert')
         const dropdown_button2 = document.querySelector('#dropdown-button2');
 
-        const set_visa_type = (element, type) => {
-            selected_visa_type = type
-            if (selected_visa_type === 0)
-                dropdown_job_type.style.display = 'inline'
+        document.querySelector('#visa-select').value = 0
+        document.querySelector('#job-visa-select').value = 0
+      
+
+        const set_visa_type = () => {
+            const select = document.querySelector('#visa-select');
+            selected_visa_type = select.value
+            if (selected_visa_type == 1)
+                div_job_visa_type.style.display = 'inline'
             else
-                dropdown_job_type.style.display = 'none'
-            dropdown_button.innerText = element.innerText
+                div_job_visa_type.style.display = 'none'
         }
 
-        const set_job_visa_type = (element, type) => {
+        const set_job_visa_type = () => {
+            const select = document.querySelector('#job-visa-select');
             sa_card.style.display = 'block'
             oman_card.style.display = 'block'
             oman_visa_card.style.display = 'block'
-            selected_job_visa_type = type
-            dropdown_button2.innerText = element.innerText
-            if (selected_job_visa_type == 0) {
+            selected_job_visa_type = select.value
+            if (selected_job_visa_type == 1) {
                 job_cert_items.forEach(element => {
                     element.style.display = 'block'
                 })
@@ -158,7 +155,7 @@
                     element.style.display = 'none'
                 })
             }
-            else if (selected_job_visa_type == 1) {
+            else if (selected_job_visa_type == 2) {
                 job_cert_items.forEach(element => {
                     element.style.display = 'none'
                 })
